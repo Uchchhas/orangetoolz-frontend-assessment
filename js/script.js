@@ -2,7 +2,9 @@ const body = document.querySelector('body'),
       dropdownToggles = document.querySelectorAll('.dropdown-toggle');
       sidebarOverlay = document.querySelector('.sidebar-overlay');
       toggleSidebarButton = document.querySelector('.btn-toggle-sidebar'),
-      submenuCollapseLinks = document.querySelectorAll('.sidebar-nav-item.has-submenu > .sidebar-nav-link');
+      submenuCollapseLinks = document.querySelectorAll('.sidebar-nav-item.has-submenu > .sidebar-nav-link'),
+      tabLinks = document.querySelectorAll('.tabs .tab-link'),
+      tabPans = document.querySelectorAll('.tabs .tab-pane');
 
 // Toggle Sidebar
 toggleSidebarButton.addEventListener('click', () => {
@@ -23,7 +25,7 @@ dropdownToggles.forEach(btn => {
     });
 });
 
-// sidebar submenus
+// Sidebar submenus
 submenuCollapseLinks.forEach(link => {
     link.addEventListener('click', function() {
         this.classList.toggle("active");
@@ -34,4 +36,26 @@ submenuCollapseLinks.forEach(link => {
             content.style.maxHeight = `${content.scrollHeight}px`;
         }
     });
-})
+});
+
+// Toggle between tabs
+tabLinks.forEach((button) => {
+    button.addEventListener('click', () => {
+        const tab = document.getElementById(button.getAttribute('data-tab-id'));
+
+        tabLinks.forEach((link) => {
+            if (link !== button && link.classList.contains('active')) {
+                link.classList.remove('active')
+            }
+        });
+
+        tabPans.forEach((pane) => {
+            if (pane !== tab && pane.classList.contains('show')) {
+                pane.classList.remove('show');
+            }
+        });
+
+        button.classList.add('active');
+        tab.classList.add('show');
+    });
+});

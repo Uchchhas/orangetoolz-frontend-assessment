@@ -1,8 +1,10 @@
 // Variables
 $white-color: #fff;
 $primary-color: #ff7901;
+$secondary-color: #7d7d7e;
 $bg-menu: #000;
 $border-color: #f2f2f4;
+$base-color: #fcfbff;
 $topbar-height: 90px;
 $sidebar-width: 224px;
 $font-color: #26262e;
@@ -17,6 +19,7 @@ body {
   margin: 0;
   color: $font-color;
   font-family: $font-family;
+  background-color: $base-color;
 }
 
 a {
@@ -43,6 +46,128 @@ a {
   color: $primary-color;
 }
 
+.divider {
+  width: 100%;
+  height: 2px;
+  display: block;
+  margin-bottom: 30px;
+  background-color: $border-color;
+}
+
+.switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: $secondary-color;
+  margin-bottom: 30px;
+  transition: $transition-duration;
+
+  &-button {
+    width: 50px;
+    height: 30px;
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    margin-right: 20px;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &:checked + .slider {
+        background-color: $primary-color;
+
+        &:before {
+          background-color: $white-color;
+          -webkit-transform: translateX(20px);
+          -ms-transform: translateX(20px);
+          transform: translateX(20px);
+        }
+      }
+
+      &:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 34px;
+      border: 1px solid $primary-color;
+      -webkit-transition: $transition-duration;
+      transition: $transition-duration;
+
+      &:before {
+        position: absolute;
+        content: '';
+        height: 20px;
+        width: 20px;
+        left: 5px;
+        bottom: 4px;
+        border-radius: 50%;
+        background-color: $primary-color;
+        -webkit-transition: $transition-duration;
+        transition: $transition-duration;
+      }
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 30px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $secondary-color;
+  }
+}
+
+.form-control {
+  width: 100%;
+  height: 60px;
+  display: block;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  transition: $transition-duration;
+
+  &:focus {
+    outline: 0;
+    border-color: $primary-color;
+  }
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+.card {
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  background: $white-color;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+  img {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 /* --- Topbar styles start here --- */
 .topbar {
   width: 100%;
@@ -50,6 +175,7 @@ a {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 99;
   display: flex;
   align-items: center;
   padding: 10px 30px 10px $sidebar-width;
@@ -76,6 +202,7 @@ a {
         width: 30px;
         height: 23px;
         position: relative;
+        display: inline-block;
         cursor: pointer;
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -197,7 +324,6 @@ a {
             position: absolute;
             top: 50%;
             width: 100%;
-            min-width: 199px;
             display: block;
             padding: 40px 20px 20px 20px;
             z-index: -1;
@@ -578,4 +704,301 @@ a {
 }
 
 /* --- Sidebar styles start here --- */
+
+/* --- Main content style starts here --- */
+.main-content {
+  padding: calc($topbar-height + 30px) 30px 30px calc($sidebar-width + 30px);
+  transition: $transition-duration;
+
+  .profile-info {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 30px;
+
+    .profile-avatar {
+      width: 325px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin-right: 30px;
+
+      img {
+        margin-bottom: 15px;
+      }
+
+      .name {
+        margin: 0;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 38px;
+      }
+
+      small {
+        margin-bottom: 5px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: $secondary-color;
+      }
+    }
+  }
+
+  .cards-wrapper {
+    flex-grow: 1;
+    padding: 30px;
+
+    .card-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    .credit-cards-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+
+      .column {
+        flex: 1 0 0%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .credit-card {
+      height: 100%;
+      position: relative;
+      padding: 30px 30px 0 30px;
+      color: $secondary-color;
+      transition: $transition-duration;
+
+      &-title {
+        margin: 0 0 30px 0;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 32px;
+      }
+
+      button {
+        &.delete-card {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border: none;
+          border-radius: 50%;
+          background-color: #f2f2f4;
+          transition: $transition-duration;
+
+          svg {
+            path {
+              transition: $transition-duration;
+            }
+          }
+        }
+      }
+
+      &:hover,
+      &.default {
+        color: $font-color;
+        border-color: $primary-color;
+
+        button {
+          &.delete-card {
+            background-color: #ffd7d7;
+
+            svg {
+              path {
+                fill: #ff4242;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .input-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 70px;
+    margin: 0 -15px;
+
+    .col-6 {
+      flex: 1 0 0%;
+      padding: 0 15px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding-left: 30px;
+
+    .profile-info {
+      margin-bottom: 20px;
+
+      .profile-avatar {
+        width: 230px;
+        margin-right: 20px;
+      }
+    }
+
+    .cards-wrapper {
+      padding: 20px;
+
+      .credit-cards-row {
+        margin: 0 -10px;
+
+        .column {
+          padding: 0 10px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .credit-card {
+        padding: 20px 20px 0 20px;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: calc($topbar-height + 20px) 20px 20px 20px;
+
+    .profile-info {
+      flex-direction: column;
+
+      .profile-avatar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+
+    .input-row {
+      flex-direction: column;
+      padding-left: 0;
+    }
+  }
+}
+
+/* --- Main content style starts here --- */
+
+
+/* colors */
+$blue: #428BFF;
+$dark: #333;
+$accent: $blue;
+$accent-inactive: desaturate($accent, 85%);
+$secondary: $accent-inactive;
+
+
+/* tab setting */
+$tab-count: 4;
+
+
+/* selectors relative to radio inputs */
+$label-selector: "~ ul > li";
+$slider-selector: "~ .slider";
+$content-selector: "~ .content > section";
+
+.tabs {
+  input[name="tab-control"] {
+    display: none;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0 0 0;
+    margin: 0;
+    list-style-type: none;
+    border-bottom: 2px solid $border-color;
+
+    li {
+      padding: 0 10px;
+      text-align: center;
+
+      button {
+        position: relative;
+        padding: 10px 16px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 28px;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition: $transition-duration;
+
+        &:after {
+          width: 100%;
+          height: 3px;
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          opacity: 0;
+          visibility: hidden;
+          background-color: $primary-color;
+          transform-origin: center;
+          transform: scale(0);
+          transition: $transition-duration;
+        }
+
+        &.active {
+          color: $primary-color;
+
+          &:after {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .tab-pane {
+      display: none;
+      max-width: 1000px;
+      padding: 50px;
+      margin: 0 auto;
+
+      animation: {
+        name: content;
+        direction: normal;
+        duration: 0.3s;
+        timing-function: ease-in-out;
+        iteration-count: 1;
+      }
+
+      &.show {
+        display: block;
+      }
+    }
+  }
+
+  @keyframes content {
+    from {
+      opacity: 0;
+      transform: translateY(5%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+}
 
